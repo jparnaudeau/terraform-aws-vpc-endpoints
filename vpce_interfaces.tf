@@ -16,7 +16,7 @@ resource "aws_vpc_endpoint" "vpce" {
   security_group_ids  = concat(try([aws_security_group.sg[each.key].id], []), lookup(each.value, "security_group_ids", []))
   subnet_ids          = lookup(each.value, "subnet_ids", [])
   private_dns_enabled = lookup(each.value, "private_dns_enabled", false)
-  
+
   tags = merge(
     {
       "Name" = format(var.naming_pattern, "vpce", format("%s-endpoint", each.key))
