@@ -39,7 +39,7 @@ resource "aws_security_group" "sg" {
       to_port     = ingress.value
       protocol    = "tcp"
       description = format("Allow subnets access %s Endpoint on port %s", upper(each.key), ingress.value)
-      cidr_blocks = lookup(each.value, "cidr_blocks", [])
+      cidr_blocks = lookup(each.value, "allowed_cidr_blocks", [])
     }
   }
 
